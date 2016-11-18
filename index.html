@@ -160,7 +160,7 @@
 					if (res[postID].reactions_like.summary.total_count > res[postID].reactions_wow.summary.total_count) {
 						theWinner = "Like"
 					}
-					else if (res[postID].reactions_love.summary.total_count > res[postID].reactions_like.summary.total_count) {
+					else if (res[postID].reactions_love.summary.total_count > res[postID].reactions_like.summary.total_count && res[postID].reactions_love.summary.total_count > res[postID].reactions_wow.summary.total_count) {
 						theWinner = "Love"
 					}
 	    		v1.text(defaultCount + res[postID].reactions_like.summary.total_count);
@@ -171,7 +171,7 @@
 	        v6.text(defaultCount + res[postID].reactions_wow.summary.total_count);
     	  });
 				switch (theWinner) {
-					case "Waouf":
+					case "Waouh":
 					  $("#winnerWow").show();
 						$("#winnerLike").hide();
 						$("#winnerLove").hide();
