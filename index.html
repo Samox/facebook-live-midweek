@@ -18,8 +18,8 @@
           margin:0;
           padding:0;
           background: url("background.png") no-repeat center fixed; /* YOUR BACKGROUND URL HERE */
-          -webkit-background-size: cover; 
-          background-size: cover; 
+          -webkit-background-size: cover;
+          background-size: cover;
         }
 		*, *:before, *:after {
 		  box-sizing: inherit;
@@ -32,35 +32,53 @@
             height: 100%;
             background: rgba(0,0,0,0.3)
 		}
-        header { 
-            text-align: center; 
+        header {
+            text-align: center;
         }
-        header .logo { 
-            position: relative; 
-            margin:100px auto 20px; 
+        header .logo {
+            position: relative;
+            margin:100px auto 20px;
             width:250px;
         }
-        h1 { 
-            text-align: center; 
-            width:100%; 
-            font-size: 50px; 
-            padding: 30px 0; 
-            margin:0; 
+        h1 {
+            text-align: center;
+            width:100%;
+            font-size: 50px;
+            padding: 30px 0;
+            margin:0;
             color:#fff;
         }
+				.isCentered {
+					display: block;
+					margin: auto;
+					width: 12,5em;
+				}
+				.bordering-carl {
+					border:15px solid #5890FF;
+					border-radius: 50%;
+				}
+				.bordering-richy {
+					border:15px solid #F25268;
+					border-radius: 50%;
+				}
+				.bordering-sex {
+					border:15px solid #FFD972;
+					border-radius: 50%;
+				}
+
 		#wrap{
 			position: relative;
 			margin: 0px auto;
 			width: 1280px;
 			height: 720px;
 		}
-        .tc { 
-            text-align: center; 
-            font-size: 3rem; 
-            font-weight: bold; 
+        .tc {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: bold;
         }
-        .wf { 
-            width: 28%; 
+        .wf {
+            width: 28%;
         }
         .wf img.illu {
             width:80%;
@@ -73,37 +91,46 @@
             display: inline-block;
             margin-right:20px;
         }
-        .wf { 
-            width: 29.3%; 
-            float:left; 
+        .wf {
+            width: 29.3%;
+            float:left;
             margin:30px 2%;
             border:solid 1px #eee;
             background:#fff;
             border-radius: 8px;
-            position: relative; 
-            text-align: center; 
+            position: relative;
+            text-align: center;
         }
 	</style>
 </head>
 <body>
     <header>
-        <img class="logo" src="socialwall.me-logo.png"> <!-- YOUR LOGO URL HERE -->
-        <h1>Midweek Live Mon gars</h1> <!-- YOUR TITLE HERE -->     
+        <!-- <img class="logo" src="socialwall.me-logo.png">-->
+				<h1>Quel est ton jeu de mot favoris</h2>
     </header>
+		<div id="winnerLike" class="isCentered">
+			<img src="DJ/DJ1.png" class="bordering-carl" alt="" />
+		</div>
+		<div id="winnerLove" class="isCentered">
+			<img src="DJ/DJ2.png" class="bordering-richy" alt="" />
+		</div>
+		<div id="winnerWow" class="isCentered">
+			<img src="DJ/DJ3.png" class="bordering-sex" alt="" />
+		</div>
     <!-- REACTIONS -->
-	<div class="tc wf likes"><img class="emoji" src="emojis/like.png"><span class="counter"></span></div>
-    <div class="tc wf happy"><img class="emoji" src="emojis/love.png"><span class="counter"></span></div>
-    <!--<div class="tc wf sad"><img class="emoji" src="emojis/sad.png"><span class="counter"></span></div>
+	  <div class="tc wf likes"> Carl Cock <br><img class="emoji" src="emojis/like.png"> <span class="counter"></span></div>
+    <div class="tc wf happy"> Richie Hot Teen <br> <img class="emoji" src="emojis/love.png"><span class="counter"></span></div>
+    <!-- <div class="tc wf sad"> Un autre dj <br> <img class="emoji" src="emojis/sad.png"><span class="counter"></span></div>
     <div class="tc wf fml"><img class="emoji" src="emojis/haha.png"><span class="counter"></span></div>
-    <div class="tc wf angry"><img class="emoji" src="emojis/angry.png"><span class="counter"></span></div>
-    <div class="tc wf shock"><img class="emoji" src="emojis/shock.png"><span class="counter"></span></div>-->
+    <div class="tc wf angry"><img class="emoji" src="emojis/angry.png"><span class="counter"></span></div> -->
+    <div class="tc wf shock"> Sex Troller <br> <img class="emoji" src="emojis/shock.png"><span class="counter"></span></div>
 
     <script src="jquery.min.js"></script>
     <script src="lodash.min.js"></script>
     <script>
     "use strict";
     var access_token = 'EAAQ2Mzs2kQkBANgVIzFfZB7OlTns14v5GvA6YWtSwJjlCTM8zUAGjMa9qwlfJXbbv7rSt51KaLJlC3dx891HcxA0fE36gmSdgvfJ8ODoAQjur9ZAqgzwli7ke671WZAJpadRQXS0DjsNbXity3MuMcZChjh5Ulnlt7urkfF9RgZDZD'; // PASTE HERE YOUR FACEBOOK ACCESS TOKEN
-    var postID = '1810890145862314'; // PASTE HERE YOUR POST ID 
+    var postID = '1810890145862314'; // PASTE HERE YOUR POST ID
     var refreshTime = 5; // Refresh time in seconds
     var defaultCount = 0; // Default count to start with
 
@@ -113,22 +140,52 @@
     }).join(',');
 
     var	v1 = $('.likes .counter'),
-    	v2 = $('.happy .counter'),
+      	v2 = $('.happy .counter'),
         v3 = $('.sad .counter'),
         v4 = $('.fml .counter'),
         v5 = $('.angry .counter'),
         v6 = $('.shock .counter');
 
+		var theWinner = "Waouh"
+		var v0 = $('.WaouhWins')
+
+
     function refreshCounts() {
         var url = 'https://graph.facebook.com/v2.8/?ids=' + postID + '&fields=' + reactions + '&access_token=' + access_token;
-    	$.getJSON(url, function(res){
-    		v1.text(defaultCount + res[postID].reactions_like.summary.total_count);
-    		v2.text(defaultCount + res[postID].reactions_love.summary.total_count);
-            v3.text(defaultCount + res[postID].reactions_sad.summary.total_count);
-            v4.text(defaultCount + res[postID].reactions_haha.summary.total_count);
-            v5.text(defaultCount + res[postID].reactions_angry.summary.total_count);
-            v6.text(defaultCount + res[postID].reactions_wow.summary.total_count);
-    	});
+    	  $.getJSON(url, function(res){
+					theWinner = "Waouh"
+					if (res[postID].reactions_like.summary.total_count > res[postID].reactions_wow.summary.total_count) {
+						theWinner = "Like"
+					}
+					else if (res[postID].reactions_love.summary.total_count > res[postID].reactions_like.summary.total_count) {
+						theWinner = "Love"
+					}
+	    		v1.text(defaultCount + res[postID].reactions_like.summary.total_count);
+	    		v2.text(defaultCount + res[postID].reactions_love.summary.total_count);
+	        v3.text(defaultCount + res[postID].reactions_sad.summary.total_count);
+	        v4.text(defaultCount + res[postID].reactions_haha.summary.total_count);
+	        v5.text(defaultCount + res[postID].reactions_angry.summary.total_count);
+	        v6.text(defaultCount + res[postID].reactions_wow.summary.total_count);
+    	  });
+				switch (theWinner) {
+					case "Waouf":
+					  $("#winnerWow").show();
+						$("#winnerLike").hide();
+						$("#winnerLove").hide();
+						break;
+					case "Like":
+						$("#winnerWow").hide();
+						$("#winnerLike").show();
+						$("#winnerLove").hide();
+						break;
+					case "Love":
+						$("#winnerWow").hide();
+						$("#winnerLike").hide();
+						$("#winnerLove").show();
+						break;
+					default:
+
+				}
     }
 
     $(document).ready(function(){
