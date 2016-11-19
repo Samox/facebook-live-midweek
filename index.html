@@ -119,21 +119,20 @@
 			<img src="DJ/DJ3.png" class="bordering-sex" alt="" />
 		</div>
     <!-- REACTIONS -->
-		<div style="margin-top: 80px;">
-			<div class="tc wf likes"> Carl Cock <br><img class="emoji" src="emojis/like.png"> <span class="counter"></span></div>
+		<div style="margin-top: 60px;">
+			<div class="tc wf likes"> Carl Cocks <br><img class="emoji" src="emojis/like.png"> <span class="counter"></span></div>
 			<div class="tc wf happy"> Richie Hot Teen <br> <img class="emoji" src="emojis/love.png"><span class="counter"></span></div>
-			<!-- <div class="tc wf sad"> Un autre dj <br> <img class="emoji" src="emojis/sad.png"><span class="counter"></span></div>
-			<div class="tc wf shock"><img class="emoji" src="emojis/shock.png"><span class="counter"></span></div>
-			<div class="tc wf angry"><img class="emoji" src="emojis/angry.png"><span class="counter"></span></div> -->
 			<div class="tc wf fml"> Sex Troller <br> <img class="emoji" src="emojis/haha.png"><span class="counter"></span></div>
-
+			<div class="tc wf shock"> Ricardo Villaboloss <br> <img class="emoji" src="emojis/shock.png"><span class="counter"></span></div>
+			<div class="tc wf sad"> Knacki Knuckles <br> <img class="emoji" src="emojis/sad.png"><span class="counter"></span></div>
+			<div class="tc wf angry"> Paul Kaka <br> <img class="emoji" src="emojis/angry.png"><span class="counter"></span></div>
 		</div>
 
     <script src="jquery.min.js"></script>
     <script src="lodash.min.js"></script>
     <script>
     "use strict";
-    var access_token = 'EAAQ2Mzs2kQkBABgmV231DgjGElWAWjPUozRqqV6cdjJTJu04zWHuNgGCvGqm2HnytRTIM09pHAqq1G5boXO0VHmxpRnwFR2Mwndp5ZAVFPRIJs2athdajjEqtbH5jhhfZA5qWPCURdTm6dFsXQPQjqGNcZBBZACwuRZClbY5IOQZDZD'; // PASTE HERE YOUR FACEBOOK ACCESS TOKEN
+    var access_token = 'EAACEdEose0cBAMZBNEKdcQeZCNAMlnfuJbzdozfqM2mJ5MhS7TxkcHpQzx8med5ZB0nV0YKncYmPs4ahQlHITcC9w4ZAmSugNvGordVVw6HCKc74GYPsVQ4AHusUEiWhljTBpl3QahWlWcwTPW291Ej9R9ed3XfweqYM4UZBl3QZDZD'; // PASTE HERE YOUR FACEBOOK ACCESS TOKEN
     var postID = '1810932392524756'; // PASTE HERE YOUR POST ID
     var refreshTime = 5; // Refresh time in seconds
     var defaultCount = 0; // Default count to start with
@@ -150,7 +149,17 @@
         v5 = $('.angry .counter'),
         v6 = $('.shock .counter');
 
+
+		v1.text(defaultCount);
+		v2.text(defaultCount);
+		v3.text(defaultCount);
+		v4.text(defaultCount);
+		v5.text(defaultCount);
+		v6.text(defaultCount);
+
 		var theWinner = "Waouh"
+		var winnerCount = []
+		var count = 0
 		var v0 = $('.WaouhWins')
 		$("#winnerWow").hide();
 		$("#winnerLike").hide();
@@ -160,6 +169,7 @@
     function refreshCounts() {
         var url = 'https://graph.facebook.com/v2.8/?ids=' + postID + '&fields=' + reactions + '&access_token=' + access_token;
     	  $.getJSON(url, function(res){
+					winnerCount = []
 					theWinner = "Waouh"
 					if (res[postID].reactions_like.summary.total_count > res[postID].reactions_wow.summary.total_count) {
 						theWinner = "Like"
@@ -168,12 +178,32 @@
 						theWinner = "Love"
 					}
 
-	    		v1.text(defaultCount + res[postID].reactions_like.summary.total_count);
-	    		v2.text(defaultCount + res[postID].reactions_love.summary.total_count);
-	        v3.text(defaultCount + res[postID].reactions_sad.summary.total_count);
-	        v4.text(defaultCount + res[postID].reactions_haha.summary.total_count);
-	        v5.text(defaultCount + res[postID].reactions_angry.summary.total_count);
+					count = res[postID].reactions_like.summary.total_count
+	    		v1.text(defaultCount + count);
+					winnerCount.push({theWinner: "Like", count: count})
+
+					count = res[postID].reactions_love.summary.total_count
+					v2.text(defaultCount + count);
+					winnerCount.push({theWinner: "Love", count: count})
+
+					count = res[postID].reactions_sad.summary.total_count
+					v3.text(defaultCount + res[postID].reactions_sad.summary.total_count);
+					winnerCount.push({theWinner: "Sad", count: count})
+
+					count = res[postID].reactions_haha.summary.total_count
+					v4.text(defaultCount + res[postID].reactions_haha.summary.total_count);
+					winnerCount.push({theWinner: "Waouh", count: count})
+
+					count = res[postID].reactions_angry.summary.total_count
+					v5.text(defaultCount + res[postID].reactions_angry.summary.total_count);
+					winnerCount.push({theWinner: "Angry", count: count})
+
+					count = res[postID].reactions_wow.summary.total_count
 	        v6.text(defaultCount + res[postID].reactions_wow.summary.total_count);
+					winnerCount.push({theWinner: "Waouh", count: count})
+
+
+					console.log(winnerCount);
     	  });
 				switch (theWinner) {
 					case "Waouh":
