@@ -66,6 +66,18 @@
 					border:15px solid #FFD972;
 					border-radius: 50%;
 				}
+				.bordering-rico {
+					border:15px solid #FFD972;
+					border-radius: 50%;
+				}
+				.bordering-knacky {
+					border:15px solid #FFD972;
+					border-radius: 50%;
+				}
+				.bordering-paul {
+					border:15px solid #F5706B;
+					border-radius: 50%;
+				}
 
 		#wrap{
 			position: relative;
@@ -107,7 +119,7 @@
 <body>
     <header>
         <!-- <img class="logo" src="socialwall.me-logo.png">-->
-				<h1 style="padding-top: 50px">Clique sur le live et VOTE</h2>
+				<h1 style="padding-top: 50px">Quel DJ devrait changer de nom ?</h2>
     </header>
 		<div class="isCentered">
 			<div id="winnerLike">
@@ -120,13 +132,13 @@
 				<img src="DJ/DJ3.png" class="bordering-sex" alt="" />
 			</div>
 			<div id="winnerWow">
-				<img src="DJ/DJ1.png" class="bordering-carl" alt="" />
+				<img src="DJ/Dj4.png" class="bordering-rico" alt="" />
 			</div>
 			<div id="winnerSad">
-				<img src="DJ/DJ2.png" class="bordering-richy" alt="" />
+				<img src="DJ/Dj5.png" class="bordering-knacky" alt="" />
 			</div>
 			<div id="winnerAngry">
-				<img src="DJ/DJ3.png" class="bordering-sex" alt="" />
+				<img src="DJ/Dj6.png" class="bordering-paul" alt="" />
 			</div>
 		</div>
     <!-- REACTIONS -->
@@ -198,7 +210,7 @@
 
 					count = res[postID].reactions_haha.summary.total_count
 					v4.text(defaultCount + res[postID].reactions_haha.summary.total_count);
-					winnerCount.push({id: "Waouh", count: count})
+					winnerCount.push({id: "Haha", count: count})
 
 					count = res[postID].reactions_angry.summary.total_count
 					v5.text(defaultCount + res[postID].reactions_angry.summary.total_count);
@@ -206,7 +218,7 @@
 
 					count = res[postID].reactions_wow.summary.total_count
 	        v6.text(defaultCount + res[postID].reactions_wow.summary.total_count);
-					winnerCount.push({id: "Waouh", count: count})
+					winnerCount.push({id: "Wow", count: count})
 
 
 					console.log(winnerCount);
