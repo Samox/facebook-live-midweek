@@ -144,7 +144,7 @@
     <script>
     "use strict";
     var access_token = 'EAACEdEose0cBAMZBNEKdcQeZCNAMlnfuJbzdozfqM2mJ5MhS7TxkcHpQzx8med5ZB0nV0YKncYmPs4ahQlHITcC9w4ZAmSugNvGordVVw6HCKc74GYPsVQ4AHusUEiWhljTBpl3QahWlWcwTPW291Ej9R9ed3XfweqYM4UZBl3QZDZD'; // PASTE HERE YOUR FACEBOOK ACCESS TOKEN
-    var postID = '1810932392524756'; // PASTE HERE YOUR POST ID
+    var postID = '1810928332525162'; // PASTE HERE YOUR POST ID
     var refreshTime = 5; // Refresh time in seconds
     var defaultCount = 0; // Default count to start with
 
@@ -186,27 +186,27 @@
 
 					count = res[postID].reactions_like.summary.total_count
 	    		v1.text(defaultCount + count);
-					winnerCount.push({theWinner: "Like", count: count})
+					winnerCount.push({id: "Like", count: count})
 
 					count = res[postID].reactions_love.summary.total_count
 					v2.text(defaultCount + count);
-					winnerCount.push({theWinner: "Love", count: count})
+					winnerCount.push({id: "Love", count: count})
 
 					count = res[postID].reactions_sad.summary.total_count
 					v3.text(defaultCount + res[postID].reactions_sad.summary.total_count);
-					winnerCount.push({theWinner: "Sad", count: count})
+					winnerCount.push({id: "Sad", count: count})
 
 					count = res[postID].reactions_haha.summary.total_count
 					v4.text(defaultCount + res[postID].reactions_haha.summary.total_count);
-					winnerCount.push({theWinner: "Waouh", count: count})
+					winnerCount.push({id: "Waouh", count: count})
 
 					count = res[postID].reactions_angry.summary.total_count
 					v5.text(defaultCount + res[postID].reactions_angry.summary.total_count);
-					winnerCount.push({theWinner: "Angry", count: count})
+					winnerCount.push({id: "Angry", count: count})
 
 					count = res[postID].reactions_wow.summary.total_count
 	        v6.text(defaultCount + res[postID].reactions_wow.summary.total_count);
-					winnerCount.push({theWinner: "Waouh", count: count})
+					winnerCount.push({id: "Waouh", count: count})
 
 
 					console.log(winnerCount);
@@ -217,31 +217,14 @@
 				$("#winnerSad").hide();
 				$("#winnerAngry").hide();
 				var theWinner = winnerCount.reduce(function(prev, current) {
-				    return (prev.count > current.count) ? prev : current
+					if (prev.count >= current.count) {
+						return prev
+					} else {
+						return current
+					}
 				})
 				console.log(theWinner);
-				switch (theWinner.theWinner) {
-					case "Like":
-						$("#winnerLike").show();
-						break;
-					case "Love":
-						$("#winnerLove").show();
-						break;
-					case "Haha":
-						$("#winnerHaha").show();
-						break;
-					case "Wow":
-					  $("#winnerWow").show();
-						break;
-					case "Sad":
-						$("#winnerSad").show();
-						break;
-					case "Angry":
-						$("#winnerAngry").show();
-						break;
-					default:
-
-				}
+				$("#winner" + theWinner.id).show();
 			});
     }
 
